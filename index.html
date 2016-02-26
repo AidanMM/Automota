@@ -1,0 +1,44 @@
+
+<html>
+  <head>
+    <style>
+      body { margin:0; padding:0 }
+    </style>
+  </head>
+
+  <body>
+    <input id="blackhole" type="checkbox" value="BlackHole">Black Hole
+    <canvas></canvas>
+  </body>
+  
+  <script src='setup.js'></script>
+  <script src='automota.js'></script>
+  <script>
+  (function(){
+  	Draw.init()
+   	this.onload = init;
+    	var colony;
+	function init() {
+		var blackHoleCheck = document.getElementById('blackhole');
+		blackHoleCheck.onchange = function(e){
+			blackHole = e.target.checked;
+		}
+		colony = Colony.create(Draw.canvas.width, Draw.canvas.height,Math.round(Draw.canvas.width / 10), Math.round(Draw.canvas.height / 10));
+		colony.randomizeState();
+		update();
+	}
+	function update() {
+		var delay = 50;
+		setTimeout(function(){
+		requestAnimationFrame(update);	
+		Draw.ctx.clearRect(0,0,Draw.canvas.width, Draw.canvas.height);
+		//Draw.ctx.fillRect(50,50,1000,1000);
+		colony.draw(Draw.ctx);
+		colony.update();
+		}, delay);
+	}
+  }());
+
+  </script>
+
+</html>
