@@ -18,13 +18,12 @@
     	var colony;
 	function init() {
 		colony = Colony.create(Draw.canvas.width, Draw.canvas.height,Math.round(Draw.canvas.width / 10), Math.round(Draw.canvas.height / 10));
-		//colony.randomizeState();
-		colony.randomizeCorruption();
-		colony.assignNeighbors();
+		colony.randomizeState();
+		colony.randomizeType(.9, "Cor");
 		update();
 	}
 	function update() {
-		var delay =50;
+		var delay =100;
 		setTimeout(function(){
 		requestAnimationFrame(update);	
 		Draw.ctx.clearRect(0,0,Draw.canvas.width, Draw.canvas.height);

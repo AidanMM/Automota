@@ -14,7 +14,7 @@ automotaBase = {
 		//Count living neighbors	
 		var living = 0;
 		for(var i = 0; i < this.numNeighbors; i++) {
-			if(this.neighbors[i] != null && this.neighbors[i].currentState > 0 ) {
+			if(this.neighbors[i] != null && this.neighbors[i].currentState > 0) {
 				living++;
 			}
 		}
@@ -104,7 +104,7 @@ Automota = Object.assign( automotaBase, {
 			}
 		} else if(this.currentState > 0) {
 			this.nextState = 1;
-			if(living >= 7  ) {
+			if(living > 0  ) {
 				var rand = Math.round(Math.random() * this.numNeighbors);
 				this.neighbors[rand] != null ? this.neighbors[rand].cellType = "Cor" : null;
 			}
@@ -129,7 +129,7 @@ colonyBase = {
 		for(var x = 0; x < xSize; x++) {
 			this.automota[x] = new Array(ySize);
 			for(var y = 0; y < ySize; y++) {
-				this.automota[x][y] = Automota.create(x,y, "GoL");
+				this.automota[x][y] = Automota.create(x,y, "Cor");
 			}
 		}
 		this.assignNeighbors();
@@ -168,13 +168,6 @@ colonyBase = {
 			}
 		}		
 	},
-	randomizeType: function(rate, type) {
-		for(var x = 0; x < this.xSize; x++) {
-			for(var y = 0; y < this.ySize; y++) {
-				Math.random() > rate ?  this.automota[x][y].cellType = type : null;
-			}
-		}		
-	}
 }
 
 Colony = Object.create(colonyBase);
